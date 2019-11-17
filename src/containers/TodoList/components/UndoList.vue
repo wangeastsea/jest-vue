@@ -1,7 +1,10 @@
 <template>
-<div>
-    <div data-test="count">
-        {{list.length}}
+<div class="undolist">
+    <div class="title">
+        正在进行
+        <span data-test="count" class="count">
+            {{list.length}}
+        </span>
     </div>
     <ul>
         <li
@@ -38,5 +41,27 @@ export default {
 }
 </script>
 <style lang="stylus">
-
+    .undolist {
+        width: 600px;
+        margin: 0 auto;
+    }
+    .title {
+        margin: 10px 0;
+        line-height: 30px;
+        font-size: 24px;
+        font-weight: bold;
+    }
+    .count {
+        margin-top: 5px;
+        float: right;
+        display: block;
+        width: 20px;
+        height: 20px;
+        line-height: 20px;
+        text-align: center;
+        background: #e6e6e6;
+        border-radius: 10px;
+        color: #000;
+        font-size: 12px;
+    }
 </style>
