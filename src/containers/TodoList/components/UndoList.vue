@@ -10,8 +10,16 @@
         <li
         v-for="(item, index) in list"
         :key="index"
+        @click="() => {itemClickHandle(index)}"
         data-test="item">
-            {{item}}
+            <input
+                v-if="item.status === 'input'"
+                :value="item.value"
+                data-test="input"
+                @blur="handleInputBlur"
+                @change="(e) => handleInputChange(e.target.value, index)"
+                />
+            <span v-else> {{item.value}}</span>
             <span
                 data-test="delete-button"
                 @click="() => {handleDelete(index)}"
@@ -35,6 +43,17 @@ export default {
   methods: {
     handleDelete (index) {
       this.$emit('delete', index)
+    },
+    itemClickHandle (index) {
+      this.$emit('status', index)
+    },
+    handleInputBlur () {
+      this.$emit('reset')
+    },
+    handleInputChange (value, index) {
+      this.$emit('change', {
+        value, index
+      })
     }
   }
 

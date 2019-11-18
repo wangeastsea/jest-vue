@@ -1,7 +1,14 @@
 <template>
     <div>
         <Header @add="addUndoItem" />
-        <undo-list :list="undoList" @delete="deleteHandle()"></undo-list>
+        <undo-list
+            :list="undoList"
+            @delete="deleteHandle"
+            @status="changeStatus"
+            @reset="resetStatus"
+            @change="changeItemStatus"
+            >
+         </undo-list>
     </div>
 </template>
 <script>
@@ -21,10 +28,44 @@ export default {
   },
   methods: {
     addUndoItem (val) {
-      this.undoList.push(val)
+      this.undoList.push({
+        status: 'div',
+        value: val
+      })
     },
     deleteHandle (index) {
       this.undoList.splice(index, 1)
+    },
+    changeStatus (index) {
+      let newUndoList = this.undoList.map((item, itemIndex) => {
+        if (itemIndex === index) {
+          return {
+            status: 'input',
+            value: item.value
+          }
+        } else {
+          return item
+        }
+      })
+      this.undoList = newUndoList
+    },
+    resetStatus () {
+      this.undoList.forEach(item => {
+        item.status = 'div'
+      })
+    },
+    changeItemStatus (obj) {
+      let newUndoList = this.undoList.map((item, itemIndex) => {
+        if (itemIndex === obj.index) {
+          return {
+            status: item.status,
+            value: obj.value
+          }
+        } else {
+          return item
+        }
+      })
+      this.undoList = newUndoList
     }
   }
 }
