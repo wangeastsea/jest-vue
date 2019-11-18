@@ -11,7 +11,7 @@
         v-for="(item, index) in list"
         :key="index"
         @click="() => {itemClickHandle(index)}"
-        data-test="item">
+        data-test="list-item">
             <input
                 v-if="item.status === 'input'"
                 :value="item.value"
