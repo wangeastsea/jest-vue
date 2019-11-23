@@ -2,9 +2,11 @@ import { mount } from '@vue/test-utils'
 import TodoList from '@/containers/TodoList/TodoList.vue'
 import { findTestWrapper } from '@/utils/testUtils'
 import store from '@/store'
+import axios from '@/containers/TodoList/__mocks__/axios.js'
 
 // 每次执行都重新计算setTimeout
 beforeEach(() => {
+  axios.success = true
   jest.useFakeTimers()
 })
 
@@ -28,7 +30,7 @@ it(`
 it(`
 1. 用户进入页面时，请求远程数据
 2. 列表应该展示远程返回的数据
-`, () => {
+`, (done) => {
   const wrapper = mount(TodoList, { store })
   expect(setTimeout).toHaveBeenCalledTimes(1)
   // 提前执行所有定时器
@@ -36,5 +38,20 @@ it(`
   wrapper.vm.$nextTick(() => {
     const listItems = findTestWrapper(wrapper, 'list-item')
     expect(listItems.length).toBe(2)
+    // nextTick 异步的测试，需要加done才能等待异步函数执行完，执行expect函数。
+    done()
+  })
+})
+
+it(`
+1. 用户进入页面时，请求远程数据失败
+2. 列表应该展示空数据，不应该挂掉
+`, (done) => {
+  axios.success = false
+  const wrapper = mount(TodoList, { store })
+  wrapper.vm.$nextTick(() => {
+    const listItems = findTestWrapper(wrapper, 'list-item')
+    expect(listItems.length).toBe(0)
+    done()
   })
 })
