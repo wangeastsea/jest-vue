@@ -1,35 +1,35 @@
 <template>
-<div class="undolist">
-    <div class="title">
-        正在进行
-        <span data-test="count" class="count">
-            {{list.length}}
-        </span>
-    </div>
-    <ul>
-        <li
-        v-for="(item, index) in list"
-        :key="index"
-        @click="() => {itemClickHandle(index)}"
-        data-test="list-item">
-            <input
-                v-if="item.status === 'input'"
-                :value="item.value"
-                data-test="input"
-                @blur="handleInputBlur"
-                @change="(e) => handleInputChange(e.target.value, index)"
-                />
-            <span v-else> {{item.value}}</span>
-            <span
-                data-test="delete-button"
-                @click="() => {handleDelete(index)}"
-                >
-                -
+    <div class="undolist">
+        <div class="title">
+            正在进行
+            <span data-test="count" class="count">
+                {{list.length}}
             </span>
-        </li>
+        </div>
+        <ul>
+            <li
+            v-for="(item, index) in list"
+            :key="index"
+            @click="() => {itemClickHandle(index)}"
+            data-test="list-item">
+                <input
+                    v-if="item.status === 'input'"
+                    :value="item.value"
+                    data-test="input"
+                    @blur="handleInputBlur"
+                    @change="(e) => handleInputChange(e.target.value, index)"
+                    />
+                <span v-else> {{item.value}}</span>
+                <span
+                    data-test="delete-button"
+                    @click="() => {handleDelete(index)}"
+                    >
+                    -
+                </span>
+            </li>
 
-    </ul>
-</div>
+        </ul>
+    </div>
 </template>
 <script>
 export default {
