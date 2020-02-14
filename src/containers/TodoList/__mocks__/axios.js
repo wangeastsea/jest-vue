@@ -13,7 +13,7 @@ export default {
         if (this.success) {
           resolve(undoList)
         } else {
-          reject(new Error())
+          reject(new Error('报错啦'))
         }
       })
     }
