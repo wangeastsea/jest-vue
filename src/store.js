@@ -8,8 +8,8 @@ const store = new Vuex.Store({
     inputValue: ''
   },
   mutations: {
-    changeInputValue (state, playload) {
-      state.inputValue = playload
+    changeInputValue (state, payload) {
+      state.inputValue = payload
     }
   }
 })
