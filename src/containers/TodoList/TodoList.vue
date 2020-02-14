@@ -54,6 +54,7 @@ export default {
         item.status = 'div'
       })
     },
+    // 改变输入框的值
     changeItemStatus (obj) {
       let newUndoList = this.undoList.map((item, itemIndex) => {
         if (itemIndex === obj.index) {
