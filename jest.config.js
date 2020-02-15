@@ -31,7 +31,7 @@ module.exports = {
   ],
   testMatch: [
     '**/tests/unit/**/*.(test|spec).[jt]s?(x)',
-    '**/__tests__/*.[jt]s?(x)'
+    '**/__tests__/**/*.[jt]s?(x)'
   ],
   //  忽略对此文件的测试执行
   // testPathIgnorePatterns: [
